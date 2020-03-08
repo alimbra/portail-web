@@ -1,0 +1,21 @@
+<div class="containerAdd">
+  <form [formGroup]="publicationForm" (ngSubmit)="onSubmit()" class="example-form">
+
+    <h3>Ajout Actualité</h3>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>le titre </mat-label>
+        <input matInput placeholder=" titre" formControlName="titre">
+      </mat-form-field>
+    
+      <mat-form-field class="example-full-width">
+        <mat-label>write a description</mat-label>
+        <textarea matInput placeholder="tell what happened..." formControlName="contenu">
+        </textarea>
+      </mat-form-field>
+      
+      <br>
+      <button mat-raised-button color="primary" [disabled] ="publicationForm.invalid" type="submit">publier</button>
+
+    </form>
+</div>

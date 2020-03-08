@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { UtilisateurService } from 'service/utilisateur.service';
 import { User } from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
 @Component({

@@ -3,4 +3,5 @@ export interface Utilisateur {
     prenom:string;
     email:string;
     photoUrl:string;
+    role:string;
 }

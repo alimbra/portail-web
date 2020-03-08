@@ -30,6 +30,10 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo, AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 import { UtilisateurComponent } from './utilisateur/utilisateur.component';
 import { UtilisateursComponent } from './utilisateurs/utilisateurs.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ActualitesComponent } from './actualites/actualites.component';
+import { ActualiteComponent } from './actualite/actualite.component';
+import { AjoutActualiteComponent } from './ajout-actualite/ajout-actualite.component';
 
 
 const adminOnly = () => hasCustomClaim('admin');
@@ -42,6 +46,9 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent,canActivate: [AngularFireAuthGuard],data: { authGuardPipe: redirectLoggedInToItems  } },
     { path: 'accueil', component: AccueilComponent,canActivate: [AngularFireAuthGuard],data:{ authGuardPipe: redirectUnauthorizedToLogin } },
     { path: 'utilisateurs', component: UtilisateursComponent,canActivate: [AngularFireAuthGuard],data:{ authGuardPipe: redirectUnauthorizedToLogin } },
+    { path: 'actualites', component: ActualitesComponent,canActivate: [AngularFireAuthGuard],data:{ authGuardPipe: redirectUnauthorizedToLogin } },
+    { path: 'ajoutActualite', component: AjoutActualiteComponent,canActivate: [AngularFireAuthGuard],data:{ authGuardPipe: redirectUnauthorizedToLogin } },
+
     { path: '**', component:AccueilComponent,canActivate: [AngularFireAuthGuard]},
 
     
@@ -57,6 +64,10 @@ export const routes: Routes = [
     AdminComponent,
     UtilisateurComponent,
     UtilisateursComponent,
+    DashboardComponent,
+    ActualitesComponent,
+    ActualiteComponent,
+    AjoutActualiteComponent,
 
   ],
   imports: [

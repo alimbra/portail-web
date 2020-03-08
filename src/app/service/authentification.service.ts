@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs/internal/Observable';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Utilisateur } from 'src/app/utilisateur';
+import { Observable } from 'rxjs';
+import { Utilisateur } from '../utilisateur';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UtilisateurService {
+export class AuthentificationService {
 
-  constructor(private afu:AngularFireAuth,private afs:AngularFirestore) { }
+  constructor(private afu:AngularFireAuth) { }
 
   public login(email:string, password:string): Promise<firebase.auth.UserCredential>{
     return this.afu.auth.signInWithEmailAndPassword(email,password)
@@ -20,9 +20,6 @@ export class UtilisateurService {
   }
   public user(): Observable<firebase.User>{
     return this.afu.user;
-  }
-  public utilisateurs(): Observable<Utilisateur[]> {
-    return this.afs.collection<Utilisateur>('utilisateurs').valueChanges();
   }
  
 }

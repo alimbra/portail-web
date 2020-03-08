@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UtilisateurService } from 'service/utilisateur.service';
 import { Utilisateur } from '../utilisateur';
 
 @Component({

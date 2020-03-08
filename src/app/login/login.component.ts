@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Validators} from '@angular/forms';
 import { FormBuilder} from "@angular/forms";
-import { UtilisateurService } from 'service/utilisateur.service';
 import { Router } from '@angular/router';
+import { AuthentificationService } from '../service/authentification.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     motdepasse:['',[Validators.required,Validators.minLength(5)] ],
   });
 
-  constructor(private fb:FormBuilder,private utilisateurService:UtilisateurService,private router:Router) {
+  constructor(private fb:FormBuilder,private authentification:AuthentificationService,private router:Router) {
 
   }
 
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     }
     else{
       console.log(this.loginForm.status);  // true
-      this.utilisateurService.login(this.loginForm.value.email,this.loginForm.value.motdepasse)
+      this.authentification.login(this.loginForm.value.email,this.loginForm.value.motdepasse)
       .then(()=>{
         this.router.navigate(['/accueil']);
       }
