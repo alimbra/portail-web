@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthentificationService } from '../service/authentification.service';
+import { UtilisateurService } from '../service/utilisateur.service';
+import { tick } from '@angular/core/testing';
 
 @Component({
   selector: 'app-navigator',
@@ -17,16 +19,20 @@ export class NavigatorComponent {
       map(result => result.matches),
       shareReplay()
     );
+  isAdmin:boolean = false;
+  constructor(private breakpointObserver: BreakpointObserver,
+    private userService:UtilisateurService,
+    private authentification:AuthentificationService,private router:Router ) {
+      let uid = localStorage.getItem('uid');
 
-  constructor(private breakpointObserver: BreakpointObserver,private authentification:AuthentificationService,private router:Router ) {}
+      this.isAdmin = this.userService.isAdmin(uid);
+    }
   
-  logout(){
+  logout() {
     this.authentification.logout().then(()=>{
       this.router.navigate(['/login']);
-    }
-    
-    ).catch(() =>{
+    }).catch(() =>{
       console.log("erreur")
-    });;
+    });
   }
 }

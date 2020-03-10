@@ -29,8 +29,8 @@ export class AjoutActualiteComponent implements OnInit {
   
     }
     else{
-      console.log(this.publicationForm.value.titre);
-      console.log(this.publicationForm.value.contenu);
+      //console.log(this.publicationForm.value.titre);
+      //console.log(this.publicationForm.value.contenu);
       // true
       
       this.actualiteService.addActualite(this.publicationForm.value)

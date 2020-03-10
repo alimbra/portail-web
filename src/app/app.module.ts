@@ -38,22 +38,22 @@ import { AjoutUtilisateurComponent } from './ajout-utilisateur/ajout-utilisateur
 import { UpdateUtilisateurComponent } from './update-utilisateur/update-utilisateur.component';
 import { MatOption, MatOptionModule } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
+import {  AuthGuard } from './guards/auth.guard';
 
-
-const adminOnly = () => hasCustomClaim('admin');
+const adminOnly = () => {hasCustomClaim('admin')};
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToItems = () => redirectLoggedInTo(['actualites']);
 
 export const routes: Routes = [
     { path: '', redirectTo:'login',pathMatch:'full'},
-    { path: 'admin', component: AdminComponent,canActivate: [AngularFireAuthGuard],data: { authGuardPipe:adminOnly  } },  
-    { path: 'login', component: LoginComponent,canActivate: [AngularFireAuthGuard],data: { authGuardPipe: redirectLoggedInToItems  } },
-    { path: 'accueil', component: AccueilComponent,canActivate: [AngularFireAuthGuard],data:{ authGuardPipe: redirectUnauthorizedToLogin } },
-    { path: 'utilisateurs', component: UtilisateursComponent,canActivate: [AngularFireAuthGuard],data:{ authGuardPipe: redirectUnauthorizedToLogin } },
-    { path: 'actualites', component: ActualitesComponent,canActivate: [AngularFireAuthGuard],data:{ authGuardPipe: redirectUnauthorizedToLogin } },
-    { path: 'ajoutActualite', component: AjoutActualiteComponent,canActivate: [AngularFireAuthGuard],data:{ authGuardPipe: redirectUnauthorizedToLogin } },
-    { path: 'ajoutUtilisateur', component: AjoutUtilisateurComponent,canActivate: [AngularFireAuthGuard],data:{ authGuardPipe: adminOnly  } },
-    { path: 'updateUtilisateur/:id', component: UpdateUtilisateurComponent,canActivate: [AngularFireAuthGuard],data:{ authGuardPipe: adminOnly  } },
+    { path: 'admin', component: AdminComponent,canActivate: [AngularFireAuthGuard]},  
+    { path: 'login', component: LoginComponent,canActivate: [AngularFireAuthGuard] },
+    { path: 'accueil', component: AccueilComponent,canActivate: [AngularFireAuthGuard] },
+    { path: 'utilisateurs', component: UtilisateursComponent,canActivate: [AngularFireAuthGuard] },
+    { path: 'actualites', component: ActualitesComponent,canActivate: [AngularFireAuthGuard] },
+    { path: 'ajoutActualite', component: AjoutActualiteComponent,canActivate: [AuthGuard] },
+    { path: 'ajoutUtilisateur', component: AjoutUtilisateurComponent,canActivate: [AngularFireAuthGuard] },
+    { path: 'updateUtilisateur/:id', component: UpdateUtilisateurComponent,canActivate: [AuthGuard] },
     
     { path: '**', component:AccueilComponent,canActivate: [AngularFireAuthGuard]},
 

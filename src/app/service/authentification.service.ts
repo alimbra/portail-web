@@ -16,6 +16,7 @@ export class AuthentificationService {
 
   }
   public logout():Promise<void>{
+    localStorage.removeItem('uid');
     return this.afu.auth.signOut();
   }
   public user(): Observable<firebase.User>{

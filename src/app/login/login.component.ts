@@ -15,7 +15,9 @@ export class LoginComponent implements OnInit {
     motdepasse:['',[Validators.required,Validators.minLength(5)] ],
   });
 
-  constructor(private fb:FormBuilder,private authentification:AuthentificationService,private router:Router) {
+  constructor(private fb:FormBuilder,
+    private authentification:AuthentificationService,
+    private router:Router) {
 
   }
 
@@ -31,8 +33,12 @@ export class LoginComponent implements OnInit {
     else{
       console.log(this.loginForm.status);  // true
       this.authentification.login(this.loginForm.value.email,this.loginForm.value.motdepasse)
-      .then(()=>{
+      .then((user)=>{
+        localStorage.setItem('uid', user.user.uid);
+        localStorage.getItem('uid');
+        
         this.router.navigate(['/accueil']);
+
       }
       ).catch(() =>{
         console.log("erreur")

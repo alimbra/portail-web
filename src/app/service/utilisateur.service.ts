@@ -33,5 +33,20 @@ export class UtilisateurService {
       "role":utilisateur.role
     });
   }
+
+  public isAdmin(uid:string):boolean {
+    let isAdmin = false;
+    this.getUtilisateur(uid).subscribe((user)=>{
+      
+      if(user.data().role=='admin'){
+        isAdmin = true;
+      }
+      else{
+        isAdmin = false;
+      }
+    });
+    return isAdmin;
+  }
+  
   
 }

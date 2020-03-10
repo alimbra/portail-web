@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccueilComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    localStorage.getItem('monObjet');
+    console.log(localStorage.getItem('monObjet'));
+    
+  }
 
   ngOnInit() {
   }
