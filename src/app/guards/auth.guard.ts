@@ -15,19 +15,21 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
       let uid = localStorage.getItem('uid');
-      let role;
+      let role = localStorage.getItem('role');
+      
+      let roleUser = '';
       if(uid == undefined){
         this.router.navigate(['/login']);
 
         return false;
       }      
-      if(this.utilisateurService.isAdmin(uid)){
+      if(role == 'admin'){
         return true;
       }
-      else{
-        this.router.navigate(['/accueil']);
-        return false;
-      }
+      this.router.navigate(['/accueil']);
+
+      return false;
+      
   }
   hasCustomClaim(){
     let role;

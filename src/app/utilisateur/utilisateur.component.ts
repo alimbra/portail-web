@@ -10,6 +10,9 @@ export class UtilisateurComponent implements OnInit {
   @Input()
   utilisateur :Utilisateur;
   
+  @Input()
+  isAdmin:boolean;
+  
   ngOnInit() {
   }
 

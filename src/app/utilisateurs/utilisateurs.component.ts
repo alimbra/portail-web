@@ -10,12 +10,25 @@ import { UtilisateurService } from '../service/utilisateur.service';
 export class UtilisateursComponent implements OnInit {
 
   utilisateurs:Utilisateur[];
+  isAdmin:boolean;
+
   constructor(private utilisateurService:UtilisateurService) { 
     this.utilisateurService.utilisateurs().subscribe( (users)=>{
-      //console.log(users);
       this.utilisateurs = users;
     });
 
+
+    let uid = localStorage.getItem('uid');
+    this.utilisateurService.getUtilisateur(uid).subscribe((user)=>{
+        
+      if(user.data().role=='admin'){
+        this.isAdmin = true;
+      }
+      else{
+        this.isAdmin = false;
+      }
+    });
+      
   }
   ngOnInit() {
   }

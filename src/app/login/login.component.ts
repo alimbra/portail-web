@@ -3,6 +3,7 @@ import {Validators} from '@angular/forms';
 import { FormBuilder} from "@angular/forms";
 import { Router } from '@angular/router';
 import { AuthentificationService } from '../service/authentification.service';
+import { UtilisateurService } from '../service/utilisateur.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb:FormBuilder,
     private authentification:AuthentificationService,
+    private userService:UtilisateurService,
     private router:Router) {
 
   }
@@ -36,7 +38,11 @@ export class LoginComponent implements OnInit {
       .then((user)=>{
         localStorage.setItem('uid', user.user.uid);
         localStorage.getItem('uid');
-        
+        this.userService.getUtilisateur(user.user.uid)
+        .subscribe( (utilisateur) =>{
+          localStorage.setItem('role', utilisateur.data().role);
+
+        } );
         this.router.navigate(['/accueil']);
 
       }

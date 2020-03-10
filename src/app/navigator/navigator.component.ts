@@ -25,7 +25,16 @@ export class NavigatorComponent {
     private authentification:AuthentificationService,private router:Router ) {
       let uid = localStorage.getItem('uid');
 
-      this.isAdmin = this.userService.isAdmin(uid);
+
+      this.userService.getUtilisateur(uid).subscribe((user)=>{
+        
+        if(user.data().role=='admin'){
+          this.isAdmin = true;
+        }
+        else{
+          this.isAdmin = false;
+        }
+      });
     }
   
   logout() {

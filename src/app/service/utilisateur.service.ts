@@ -34,7 +34,7 @@ export class UtilisateurService {
     });
   }
 
-  public isAdmin(uid:string):boolean {
+/*  public isAdmin(uid:string):boolean {
     let isAdmin = false;
     this.getUtilisateur(uid).subscribe((user)=>{
       
@@ -46,7 +46,7 @@ export class UtilisateurService {
       }
     });
     return isAdmin;
-  }
+  }*/
   
   
 }
