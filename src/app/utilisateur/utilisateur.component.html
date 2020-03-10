@@ -5,10 +5,13 @@
       <mat-card-subtitle>{{ utilisateur.prenom }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      {{utilisateur.email}}
+      Email : {{ utilisateur.email }}
+      Role : {{ utilisateur.role }}
+      
+      
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>SHARE</button>
+      <button mat-button [routerLink]="['/updateUtilisateur',utilisateur.id]" >Modifier</button>
+      <button mat-button >Supprimer </button>
     </mat-card-actions>
   </mat-card>

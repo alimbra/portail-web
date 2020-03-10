@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ActualiteService } from '../service/actualite.service';
+import { Actualite } from '../actualite';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ajout-actualite',
@@ -12,29 +15,35 @@ export class AjoutActualiteComponent implements OnInit {
     titre:['',[Validators.required,]],
     contenu:['',[Validators.required,Validators.minLength(10)] ],
   });
-  constructor(private fb:FormBuilder) { }
+  constructor(private fb:FormBuilder,
+    private actualiteService:ActualiteService,
+    private router:Router) { }
 
   ngOnInit() { 
   }
 
-  onSumbit(){
+  onSubmit(){
+    
     if (this.publicationForm.invalid) {
       console.log(this.publicationForm.status);  // false
   
     }
     else{
-      console.log(this.publicationForm.status);  // true
-      /*
-        this.authentification.login(this.loginForm.value.email,this.loginForm.value.motdepasse)
-        .then(()=>{
-          this.router.navigate(['/accueil']);
-        }
-        ).catch(() =>{
-          console.log("erreur")
-        });
-      */ 
+      console.log(this.publicationForm.value.titre);
+      console.log(this.publicationForm.value.contenu);
+      // true
+      
+      this.actualiteService.addActualite(this.publicationForm.value)
+      .then(()=> {
+        console.log("SUCCESS ");
+        this.router.navigate(['/actualites']);
+      })
+      .catch( () => {
+        console.log("UNSUCCESS ");
+      })
+      
     }
-  
+
   }
 
 }

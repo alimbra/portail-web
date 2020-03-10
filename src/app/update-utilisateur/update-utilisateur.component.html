@@ -1,0 +1,41 @@
+<div class="containerAdd">
+    <form [formGroup]="updateUtilisateurForm" (ngSubmit)="onSubmit()" class="example-form">
+  
+      <h3>Ajout Actualité</h3>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>photoUtl </mat-label>
+        <input matInput placeholder="photoUrl" formControlName="photoUrl">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+          <mat-label>Nom </mat-label>
+          <input matInput placeholder=" nom" formControlName="nom">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Prenom </mat-label>
+            <input matInput placeholder=" prenom" formControlName="prenom">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label> Email </mat-label>
+            <input matInput placeholder=" email" formControlName="email">
+        </mat-form-field>
+
+      
+        <mat-form-field>
+        <mat-label>rôle</mat-label>
+            <mat-select formControlName="role" [(value)]="role">
+                <mat-option value="client"> Client</mat-option>
+                <mat-option value="employe"> Employé</mat-option>
+                <mat-option value="admin"> Administrateur</mat-option>
+            </mat-select>
+        </mat-form-field>
+  
+        
+        <br>
+        <button mat-raised-button color="accent" [disabled] ="updateUtilisateurForm.invalid" type="submit">mettre à jour l´utilisateur</button>
+  
+      </form>
+  </div>
+  

@@ -18,7 +18,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
+import { MatListModule, MatSelectionList } from '@angular/material/list';
 import { AdminComponent } from './admin/admin.component';
 
 import { environment } from '../environments/environment';
@@ -34,11 +34,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ActualitesComponent } from './actualites/actualites.component';
 import { ActualiteComponent } from './actualite/actualite.component';
 import { AjoutActualiteComponent } from './ajout-actualite/ajout-actualite.component';
+import { AjoutUtilisateurComponent } from './ajout-utilisateur/ajout-utilisateur.component';
+import { UpdateUtilisateurComponent } from './update-utilisateur/update-utilisateur.component';
+import { MatOption, MatOptionModule } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 
 
 const adminOnly = () => hasCustomClaim('admin');
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
-const redirectLoggedInToItems = () => redirectLoggedInTo(['items']);
+const redirectLoggedInToItems = () => redirectLoggedInTo(['actualites']);
 
 export const routes: Routes = [
     { path: '', redirectTo:'login',pathMatch:'full'},
@@ -48,7 +52,9 @@ export const routes: Routes = [
     { path: 'utilisateurs', component: UtilisateursComponent,canActivate: [AngularFireAuthGuard],data:{ authGuardPipe: redirectUnauthorizedToLogin } },
     { path: 'actualites', component: ActualitesComponent,canActivate: [AngularFireAuthGuard],data:{ authGuardPipe: redirectUnauthorizedToLogin } },
     { path: 'ajoutActualite', component: AjoutActualiteComponent,canActivate: [AngularFireAuthGuard],data:{ authGuardPipe: redirectUnauthorizedToLogin } },
-
+    { path: 'ajoutUtilisateur', component: AjoutUtilisateurComponent,canActivate: [AngularFireAuthGuard],data:{ authGuardPipe: adminOnly  } },
+    { path: 'updateUtilisateur/:id', component: UpdateUtilisateurComponent,canActivate: [AngularFireAuthGuard],data:{ authGuardPipe: adminOnly  } },
+    
     { path: '**', component:AccueilComponent,canActivate: [AngularFireAuthGuard]},
 
     
@@ -68,12 +74,14 @@ export const routes: Routes = [
     ActualitesComponent,
     ActualiteComponent,
     AjoutActualiteComponent,
+    AjoutUtilisateurComponent,
+    UpdateUtilisateurComponent,
 
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatInputModule,MatFormFieldModule,MatButtonModule,
+    MatInputModule,MatFormFieldModule,MatButtonModule,MatOptionModule,MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes),

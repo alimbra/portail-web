@@ -21,5 +21,9 @@ export class AuthentificationService {
   public user(): Observable<firebase.User>{
     return this.afu.user;
   }
+  
+  public addUser(email:string, password:string):Promise<firebase.auth.UserCredential>{
+    return this.afu.auth.createUserWithEmailAndPassword(email,password);
+  }
  
 }
