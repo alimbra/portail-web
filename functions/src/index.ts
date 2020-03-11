@@ -13,6 +13,11 @@ exports.triggerUser = functions.auth.user().onCreate((user) => {
   return admin
     .firestore()
     .collection('utilisateurs').doc(user.uid).set({
-      email: user.email
+      email: user.email,
+      nom:'',
+      prenom:'',
+      telephone:'',
+      role:'',
+      photoUrl:'',
     });
 });

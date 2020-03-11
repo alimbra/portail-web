@@ -15,6 +15,9 @@ a.truncate {
     display: inline-block;
     width: 188px;
 }
+mat-card-header{
+    overflow: hidden;
+}
 mat-card-subtitle.contact-info {
     display: flex;
     margin-top: -7px;
