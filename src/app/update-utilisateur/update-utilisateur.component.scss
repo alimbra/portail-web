@@ -1,0 +1,32 @@
+.example-form {
+    width: 100%;
+}
+.example-form h3
+{
+    text-align: center;
+}
+
+  
+.example-full-width {
+    width: 100%;
+}
+
+.containerAdd{
+    width: 100%;
+    margin-bottom: 20px;   
+}
+
+.example-form{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+}
+.example-form > * {
+    width: 100%;   
+}
+.invalid-feedback{
+    color:red;
+    font-style: italic;
+}
+  

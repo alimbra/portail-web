@@ -1,0 +1,57 @@
+<div class="containerAdd">
+    <form [formGroup]="updateUtilisateurForm" (ngSubmit)="onSubmit()" class="example-form">
+  
+      <h3>Modification Utilisateur</h3>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>photoUtl </mat-label>
+        <input matInput placeholder="photoUrl" formControlName="photoUrl">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Nom </mat-label>
+        <input matInput placeholder=" nom" formControlName="nom" [ngClass]="{ 'is-invalid': f.nom.errors }">
+        <div *ngIf="f.nom.errors" class="invalid-feedback">
+            <div *ngIf="f.nom.errors.required">le nom est requis</div>
+            <div *ngIf="f.nom.errors.minlength">le nom doit avoir minimum 3 charactères</div>
+        </div>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Prenom </mat-label>
+            <input matInput placeholder=" prenom" formControlName="prenom" [ngClass]="{ 'is-invalid': f.prenom.errors }">
+            <div *ngIf="f.prenom.errors" class="invalid-feedback">
+                <div *ngIf="f.prenom.errors.required">le prenom est requis</div>
+                <div *ngIf="f.prenom.errors.minlength">le prenom doit avoir minimum 3 charactères</div>
+            </div>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label> Email </mat-label>
+            <input matInput placeholder=" email" formControlName="email"  [ngClass]="{ 'is-invalid': f.email.errors }">
+            <div *ngIf="f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+                <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+            </div>
+        </mat-form-field>
+
+      
+        <mat-form-field class="example-full-width">
+        <mat-label>rôle</mat-label>
+            <mat-select formControlName="role" [(value)]="role">
+                <mat-option value="client"> Client</mat-option>
+                <mat-option value="employe"> Employé</mat-option>
+                <mat-option value="admin"> Administrateur</mat-option>
+            </mat-select>
+        </mat-form-field>
+  
+        
+        <br>
+        <mat-card-actions class="example-full-width" >
+
+          <button mat-button color="primary" type="submit" (click)="save">mettre à jour l´utilisateur</button>
+
+          <button mat-button type="button" (click)="cancel()">annuler</button>
+        </mat-card-actions>
+    </form>
+</div>
+  

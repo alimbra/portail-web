@@ -1,6 +1,8 @@
 export interface Utilisateur {
-    nom:string;
-    prenom:string;
-    email:string;
-    photoUrl:string;
+    id: string;
+    nom: string;
+    prenom: string;
+    email: string;
+    photoUrl: string;
+    role: string;
 }

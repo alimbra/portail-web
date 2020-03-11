@@ -1,0 +1,30 @@
+<div class="containerAdd">
+  <form [formGroup]="publicationForm" (ngSubmit)="onSubmit()" class="example-form">
+
+    <h3>Ajout Actualité</h3>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>le titre </mat-label>
+        <input matInput placeholder=" titre" formControlName="titre" [ngClass]="{ 'is-invalid': f.titre.errors }">
+        <div *ngIf="f.titre.errors" class="invalid-feedback">
+            <div *ngIf="f.titre.errors.required">le titre est requis</div>
+            <div *ngIf="f.titre.errors.minlength">le titre doit avoir minimum 3 charactères</div>
+        </div>
+      </mat-form-field>
+    
+      <mat-form-field class="example-full-width">
+        <mat-label>write a description</mat-label>
+        <textarea matInput placeholder="tell what happened..." formControlName="contenu"  [ngClass]="{ 'is-invalid': f.contenu.errors }">
+        </textarea>
+
+        <div *ngIf="f.contenu.errors" class="invalid-feedback">
+          <div *ngIf="f.contenu.errors.required">le contenu est requis</div>
+          <div *ngIf="f.contenu.errors.minlength">le contenu doit avoir minimum 10 charactères</div>
+      </div>
+      </mat-form-field>
+      
+      <br>
+      <button mat-raised-button color="primary" [disabled] ="publicationForm.invalid" type="submit">publier</button>
+
+    </form>
+</div>

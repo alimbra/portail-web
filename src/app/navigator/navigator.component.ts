@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { UtilisateurService } from 'service/utilisateur.service';
 import { Router } from '@angular/router';
+import { AuthentificationService } from '../service/authentification.service';
+import { UtilisateurService } from '../service/utilisateur.service';
+import { tick } from '@angular/core/testing';
 
 @Component({
   selector: 'app-navigator',
@@ -17,15 +19,36 @@ export class NavigatorComponent {
       map(result => result.matches),
       shareReplay()
     );
+  isAdmin = false;
+  isEmploye = false;
+  constructor(private breakpointObserver: BreakpointObserver,
+              private userService: UtilisateurService,
+              private authentification: AuthentificationService, private router: Router ) {
+      const uid = localStorage.getItem('uid');
 
-  constructor(private breakpointObserver: BreakpointObserver,private us:UtilisateurService,private router:Router ) {}
-  
-  logout(){
-    this.us.logout().then(()=>{
-      this.router.navigate(['/login']);
+
+      this.userService.getUtilisateur(uid).subscribe((user) => {
+
+        if (user.data().role === 'admin') {
+          this.isAdmin = true;
+        } else {
+          this.isAdmin = false;
+        }
+
+        if (user.data().role === 'employe') {
+          this.isEmploye = true;
+        } else {
+          this.isEmploye = false;
+        }
+
+      });
     }
-    ).catch(() =>{
-      console.log("erreur")
-    });;
+
+  logout() {
+    this.authentification.logout().then(() => {
+      this.router.navigate(['/login']);
+    }).catch(() => {
+      console.log('erreur');
+    });
   }
 }

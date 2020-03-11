@@ -1,6 +1,7 @@
+<section>
 
-<div class="containerUsers">
     <div class="containerUser" *ngFor="let utilisateur of utilisateurs" >
-        <app-utilisateur  [utilisateur] = "utilisateur" > </app-utilisateur>
+        <app-utilisateur  [utilisateur] = "utilisateur" [isAdmin] = "isAdmin" > </app-utilisateur>
     </div>
-</div>
+
+</section>

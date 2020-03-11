@@ -1,0 +1,8 @@
+<mat-list>
+    <h3 mat-subheader>Folders</h3>
+    <mat-list-item *ngFor="let document of documents">
+      <app-document [document] = "document"  > </app-document>
+
+    </mat-list-item>
+  </mat-list>
+  
