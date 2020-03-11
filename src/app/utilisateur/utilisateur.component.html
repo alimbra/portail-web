@@ -14,6 +14,14 @@
         >
       </mat-card-subtitle>
       <mat-card-subtitle class="contact-info">
+        <mat-icon>phone</mat-icon>
+        <a
+          href="phoneto:{{ utilisateur.telephone }}&gt;"
+          title="call {{ utilisateur.prenom }} {{ utilisateur.nom }}"
+          class="truncate">{{ utilisateur.telephone }}</a
+        >
+      </mat-card-subtitle>
+      <mat-card-subtitle class="contact-info">
         <mat-icon>{{utilisateur.role.toUpperCase()}}</mat-icon>
       </mat-card-subtitle>
       

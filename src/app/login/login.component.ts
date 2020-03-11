@@ -15,10 +15,14 @@ export class LoginComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]],
     motdepasse: ['', [Validators.required, Validators.minLength(5)] ],
   });
+  isError = false;
+
+  get f() { return this.loginForm.controls; }
 
   constructor(private fb: FormBuilder,
               private authentification: AuthentificationService,
               private userService: UtilisateurService,
+              
               private router: Router) {
 
   }
@@ -35,6 +39,8 @@ export class LoginComponent implements OnInit {
       console.log(this.loginForm.status);  // true
       this.authentification.login(this.loginForm.value.email, this.loginForm.value.motdepasse)
       .then((user) => {
+        this.isError = false;
+
         localStorage.setItem('uid', user.user.uid);
         localStorage.getItem('uid');
         this.userService.getUtilisateur(user.user.uid)
@@ -46,6 +52,7 @@ export class LoginComponent implements OnInit {
 
       }
       ).catch(() => {
+        this.isError = true;
         console.log('erreur');
       });
 

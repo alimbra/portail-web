@@ -34,6 +34,15 @@
             </div>
         </mat-form-field>
 
+        <mat-form-field class="example-full-width">
+            <mat-label> Telephone </mat-label>
+            <input matInput placeholder=" telephone" formControlName="telephone"  [ngClass]="{ 'is-invalid': f.telephone.errors }">
+            <div *ngIf="f.telephone.errors" class="invalid-feedback">
+                <div *ngIf="f.telephone.errors.required">Telephone is required</div>
+                <div *ngIf="f.telephone.errors.minlength">le prenom doit avoir minimum 3 charactères</div>
+            </div>
+        </mat-form-field>
+
       
         <mat-form-field class="example-full-width">
         <mat-label>rôle</mat-label>

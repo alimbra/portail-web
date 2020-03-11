@@ -20,6 +20,7 @@ export class UpdateUtilisateurComponent implements OnInit {
     prenom: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
     role: '',
+    telephone:['', [Validators.required, Validators.minLength(12)]],
     photoUrl: ['', [Validators.required]]
   });
 
@@ -42,8 +43,10 @@ export class UpdateUtilisateurComponent implements OnInit {
         nom: [user.data().nom, [Validators.required, Validators.minLength(3)]],
         prenom: [user.data().prenom, [Validators.required, Validators.minLength(3)]],
         email: [user.data().email, [Validators.required, Validators.email]],
+        telephone:[user.data().telephone, [Validators.required, Validators.minLength(12)]],
         role: [user.data().role, Validators.required],
         photoUrl: [user.data().photoUrl, Validators.required]
+        
       });
     });
 

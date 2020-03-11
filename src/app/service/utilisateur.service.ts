@@ -30,6 +30,7 @@ export class UtilisateurService {
       nom: utilisateur.nom,
       prenom: utilisateur.prenom,
       email: utilisateur.email,
+      telephone: utilisateur.telephone,
       photoUrl: utilisateur.photoUrl,
       role: utilisateur.role
     });
