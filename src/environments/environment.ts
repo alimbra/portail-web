@@ -12,7 +12,6 @@ export const environment = {
     storageBucket: 'ismail-web.appspot.com',
     messagingSenderId: '273057831564',
     appId: '1:273057831564:web:c85ee1dd8abbedbaecb9a9'
-
   }
 };
 
