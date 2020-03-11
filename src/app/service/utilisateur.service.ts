@@ -11,6 +11,7 @@ import { ActionSequence } from 'protractor';
 export class UtilisateurService {
 
   constructor(private afs:AngularFirestore) { }
+  
   public utilisateurs(): Observable<Utilisateur[]> {
     return this.afs.collection<Utilisateur>('utilisateurs').valueChanges({ idField: 'id' });
   }

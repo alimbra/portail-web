@@ -12,7 +12,6 @@ import {MatCardModule} from '@angular/material/card';
 
 import { FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { AccueilComponent } from './accueil/accueil.component';
-import { InscriptionComponent } from './inscription/inscription.component';
 import { NavigatorComponent } from './navigator/navigator.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -34,11 +33,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ActualitesComponent } from './actualites/actualites.component';
 import { ActualiteComponent } from './actualite/actualite.component';
 import { AjoutActualiteComponent } from './ajout-actualite/ajout-actualite.component';
-import { AjoutUtilisateurComponent } from './ajout-utilisateur/ajout-utilisateur.component';
 import { UpdateUtilisateurComponent } from './update-utilisateur/update-utilisateur.component';
 import { MatOption, MatOptionModule } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {  AuthGuard } from './guards/auth.guard';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DocumentsComponent } from './documents/documents.component';
 
 const adminOnly = () => {hasCustomClaim('admin')};
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
@@ -52,8 +52,8 @@ export const routes: Routes = [
     { path: 'utilisateurs', component: UtilisateursComponent,canActivate: [AngularFireAuthGuard] },
     { path: 'actualites', component: ActualitesComponent,canActivate: [AngularFireAuthGuard] },
     { path: 'ajoutActualite', component: AjoutActualiteComponent,canActivate: [AuthGuard] },
-    { path: 'ajoutUtilisateur', component: AjoutUtilisateurComponent,canActivate: [AngularFireAuthGuard] },
-    { path: 'updateUtilisateur/:id', component: UpdateUtilisateurComponent,canActivate: [AuthGuard] },
+    { path: 'updateutilisateur/:id', component: UpdateUtilisateurComponent,canActivate: [AuthGuard] },
+    { path: 'documents', component: DocumentsComponent,canActivate: [AuthGuard] },
     
     { path: '**', component:AccueilComponent,canActivate: [AngularFireAuthGuard]},
 
@@ -65,7 +65,6 @@ export const routes: Routes = [
     AppComponent,
     LoginComponent,
     AccueilComponent,
-    InscriptionComponent,
     NavigatorComponent,
     AdminComponent,
     UtilisateurComponent,
@@ -74,8 +73,8 @@ export const routes: Routes = [
     ActualitesComponent,
     ActualiteComponent,
     AjoutActualiteComponent,
-    AjoutUtilisateurComponent,
     UpdateUtilisateurComponent,
+    DocumentsComponent,
 
   ],
   imports: [
@@ -91,6 +90,7 @@ export const routes: Routes = [
     MatIconModule,
     MatListModule,
     MatCardModule,
+    MatDialogModule,
     AngularFireModule.initializeApp(environment.firebase),
 
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features

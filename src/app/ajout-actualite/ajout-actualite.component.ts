@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class AjoutActualiteComponent implements OnInit {
 
   publicationForm = this.fb.group({
-    titre:['',[Validators.required,]],
+    titre:['',[Validators.required,Validators.minLength(3)]],
     contenu:['',[Validators.required,Validators.minLength(10)] ],
   });
   constructor(private fb:FormBuilder,
@@ -21,6 +21,8 @@ export class AjoutActualiteComponent implements OnInit {
 
   ngOnInit() { 
   }
+
+  get f() { return this.publicationForm.controls; }
 
   onSubmit(){
     

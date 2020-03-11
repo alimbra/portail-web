@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular/core';
+import { FormBuilder,Validators  } from '@angular/forms';
 import { Utilisateur } from '../utilisateur';
 import { UtilisateurService } from '../service/utilisateur.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-update-utilisateur',
@@ -10,52 +11,71 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./update-utilisateur.component.scss']
 })
 export class UpdateUtilisateurComponent implements OnInit {
+  @Output('cancel') cancel$: EventEmitter<any>;
+  @Output('personAdd') add$: EventEmitter<any>;
 
-  
   updateUtilisateurForm = this.fb.group({
 
-    nom:'',
-    prenom:'',
-    email:'',
+    nom:['',[Validators.required,Validators.minLength(3)]],
+    prenom:['',[Validators.required,Validators.minLength(3)]],
+    email:['',[Validators.required,Validators.email]],
     role:'',
-    photoUrl:''
+    photoUrl:['',[Validators.required]]
   })
 
-  constructor(private fb:FormBuilder,private actiroute:ActivatedRoute,
-    private utilisateurService:UtilisateurService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data:any ,
+    private fb:FormBuilder,
+    private utilisateurService:UtilisateurService,
+    public dialogRef: MatDialogRef<UpdateUtilisateurComponent>) {
+      this.add$ = new EventEmitter();
+      this.cancel$ = new EventEmitter();
+  }
+
+  get f() { return this.updateUtilisateurForm.controls; }
   
   ngOnInit() {
+    let userID = this.data.utilisateur.id;
 
-    let userId = '';
-    this.actiroute.params.subscribe(params => {
-      userId = params['id'];
-      console.log(userId);
-    });
-    this.utilisateurService.getUtilisateur(userId).subscribe(user =>{
-      
+    this.utilisateurService.getUtilisateur(userID).subscribe(user =>{      
       this.updateUtilisateurForm = this.fb.group({
-        id:userId,
-        nom:user.data().nom,
-        prenom:user.data().prenom,
-        email:user.data().email,
-        role:user.data().role, 
-        photoUrl:user.data().photoUrl
+        id:[userID,Validators.required],
+        nom:[user.data().nom,[Validators.required,Validators.minLength(3)]],
+        prenom:[user.data().prenom,[Validators.required,Validators.minLength(3)]],
+        email:[user.data().email,[Validators.required,Validators.email]],
+        role:[user.data().role,Validators.required], 
+        photoUrl:[user.data().photoUrl,Validators.required]
       })
-
     });
 
   }
 
   onSubmit(){
-    if(!this.updateUtilisateurForm.invalid){
-
+    console.log(this.updateUtilisateurForm.value);
+    
       this.utilisateurService.updateUtilisateur(this.updateUtilisateurForm.value).then(()=>{
         console.log('success');
+        this.closeDialog();
+
       })
       .catch(()=>{
         console.log("unsucess");
+        this.closeDialog();
+
       });
-    }
+    
   }
+  closeDialog(result = null) {
+    this.dialogRef.close(result);
+  }
+  
+  cancel() {
+    this.closeDialog();
+  }
+
+  save() {
+    this.closeDialog();
+
+  }
+
 
 }

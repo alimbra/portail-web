@@ -5,12 +5,24 @@
       <mat-card-subtitle>{{ utilisateur.prenom }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      Email : {{ utilisateur.email }}
-      Role : {{ utilisateur.role }}
+      <mat-card-subtitle class="contact-info">
+        <mat-icon>email</mat-icon>
+        <a
+          href="mailto:{{ utilisateur.prenom }} {{ utilisateur.nom }}&lt;{{ utilisateur.email }}&gt;"
+          title="Send an email to {{ utilisateur.prenom }} {{ utilisateur.nom }}"
+          class="truncate">{{ utilisateur.email }}</a
+        >
+      </mat-card-subtitle>
+      <mat-card-subtitle class="contact-info">
+        <mat-icon>{{utilisateur.role.toUpperCase()}}</mat-icon>
+      </mat-card-subtitle>
       
       
     </mat-card-content>
     <mat-card-actions>
-      <button *ngIf="isAdmin" mat-button [routerLink]="['/updateUtilisateur',utilisateur.id]" >Modifier</button>
+      <button (click)="showDialog()" *ngIf="isAdmin && dialogStatus == 'inactive'" mat-mini-fab color="accent">
+        <i class="material-icons">edit</i>
+      </button>
     </mat-card-actions>
+
   </mat-card>
