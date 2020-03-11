@@ -20,6 +20,7 @@ export class NavigatorComponent {
       shareReplay()
     );
   isAdmin:boolean = false;
+  isEmploye:boolean = false;
   constructor(private breakpointObserver: BreakpointObserver,
     private userService:UtilisateurService,
     private authentification:AuthentificationService,private router:Router ) {
@@ -34,6 +35,14 @@ export class NavigatorComponent {
         else{
           this.isAdmin = false;
         }
+
+        if(user.data().role=='employe'){
+          this.isEmploye = true;
+        }
+        else{
+          this.isEmploye = false;
+        }
+
       });
     }
   

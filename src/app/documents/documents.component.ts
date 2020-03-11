@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Section } from '../section';
+import { DocumentService } from '../service/document.service';
 
 @Component({
   selector: 'app-documents',
@@ -9,23 +10,25 @@ import { Section } from '../section';
 export class DocumentsComponent implements OnInit {
 
   
-  folders: Section[] = [
-    {
-      name: 'Photos',
-      updated: new Date('1/1/16'),
-    },
-    {
-      name: 'Recipes',
-      updated: new Date('1/17/16'),
-    },
-    {
-      name: 'Work',
-      updated: new Date('1/28/16'),
-    }
-  ];
-  constructor() { }
+  documents: Section[];
+
+  constructor(private documentService:DocumentService) { 
+    this.documentService.documents().subscribe( (docs)=>{
+      this.documents = docs;
+      this.documents.forEach(element => {
+        this.documentService.getStoredFiles(element.nom)
+        .then((link)=>{
+          console.log(link);
+          element.lien = link;
+
+        });
+      });
+    });
+  }
 
   ngOnInit() {
+    console.log(this.documents);
+    
   }
 
 }

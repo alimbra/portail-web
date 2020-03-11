@@ -11,6 +11,9 @@
       <a mat-list-item [routerLink]="['/ajoutActualite']" *ngIf="isAdmin">Ajout Actualités</a>
       
       <a mat-list-item [routerLink]="['/utilisateurs']">Utilisateurs</a>
+      <a mat-list-item [routerLink]="['/documents']">Documents</a>
+      <a mat-list-item [routerLink]="['/ajoutdocument']" *ngIf="isAdmin || isEmploye">Ajout document</a>
+
       <a mat-list-item (click) = "logout()">Logout</a>
 
     </mat-nav-list>

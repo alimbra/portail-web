@@ -1,4 +1,4 @@
 export interface Section {
-    name: string;
-    updated: Date;
+    nom: string;
+    lien: string;
 }

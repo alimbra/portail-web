@@ -39,6 +39,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {  AuthGuard } from './guards/auth.guard';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DocumentsComponent } from './documents/documents.component';
+import { AjoutDocumentComponent } from './ajout-document/ajout-document.component';
+import { DocumentComponent } from './document/document.component';
 
 const adminOnly = () => {hasCustomClaim('admin')};
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
@@ -53,7 +55,8 @@ export const routes: Routes = [
     { path: 'actualites', component: ActualitesComponent,canActivate: [AngularFireAuthGuard] },
     { path: 'ajoutActualite', component: AjoutActualiteComponent,canActivate: [AuthGuard] },
     { path: 'updateutilisateur/:id', component: UpdateUtilisateurComponent,canActivate: [AuthGuard] },
-    { path: 'documents', component: DocumentsComponent,canActivate: [AuthGuard] },
+    { path: 'documents', component: DocumentsComponent,canActivate: [AngularFireAuthGuard] },
+    { path: 'ajoutdocument', component: AjoutDocumentComponent,canActivate: [AuthGuard] },
     
     { path: '**', component:AccueilComponent,canActivate: [AngularFireAuthGuard]},
 
@@ -75,6 +78,8 @@ export const routes: Routes = [
     AjoutActualiteComponent,
     UpdateUtilisateurComponent,
     DocumentsComponent,
+    AjoutDocumentComponent,
+    DocumentComponent,
 
   ],
   imports: [
