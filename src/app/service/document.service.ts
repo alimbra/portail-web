@@ -10,7 +10,7 @@ import { Section } from '../section';
 export class DocumentService {
 
   constructor(
-    private afs:AngularFireStorage,private afstore:AngularFirestore
+    private afs: AngularFireStorage, private afstore: AngularFirestore
     ) { }
 
     ref: AngularFireStorageReference;
@@ -18,10 +18,10 @@ export class DocumentService {
     uploadState: Observable<string>;
     uploadProgress: Observable<number>;
     downloadURL: Observable<string>;
-    
-  public storeFile(event):Observable<number>{
 
-    const nom = event.target.files[0]['name'];
+  public storeFile(event): Observable<number> {
+
+    const nom = event.target.files[0].name;
     this.ref = this.afs.ref(nom);
     this.task = this.ref.put(event.target.files[0]);
 
@@ -29,17 +29,17 @@ export class DocumentService {
 
   }
 
-  public getStoredFiles(nom:string){
+  public getStoredFiles(nom: string) {
 
     return this.afs.storage.ref(nom).getDownloadURL();
   }
 
 
-  public addDocument(section:Section) {
+  public addDocument(section: Section) {
     return this.afstore.collection<Section>('documents').add(section);
   }
 
-  public documents():Observable<Section[]> {
+  public documents(): Observable<Section[]> {
     return this.afstore.collection<Section>('documents').valueChanges({});
   }
 }

@@ -1,4 +1,4 @@
 export interface Actualite {
-    contenu:string;
-    titre:string;
+    contenu: string;
+    titre: string;
 }

@@ -9,7 +9,7 @@ import { Actualite } from '../actualite';
 export class ActualiteComponent implements OnInit {
 
   @Input()
-  actualite:Actualite;
+  actualite: Actualite;
   constructor() { }
 
   ngOnInit() {

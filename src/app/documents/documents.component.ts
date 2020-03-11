@@ -9,15 +9,15 @@ import { DocumentService } from '../service/document.service';
 })
 export class DocumentsComponent implements OnInit {
 
-  
+
   documents: Section[];
 
-  constructor(private documentService:DocumentService) { 
-    this.documentService.documents().subscribe( (docs)=>{
+  constructor(private documentService: DocumentService) {
+    this.documentService.documents().subscribe( (docs) => {
       this.documents = docs;
       this.documents.forEach(element => {
         this.documentService.getStoredFiles(element.nom)
-        .then((link)=>{
+        .then((link) => {
           console.log(link);
           element.lien = link;
 
@@ -28,7 +28,7 @@ export class DocumentsComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.documents);
-    
+
   }
 
 }

@@ -10,10 +10,10 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class AppComponent {
   items: Observable<any[]>;
-  user:Observable<User>;
+  user: Observable<User>;
   title = 'application';
-  constructor(db: AngularFirestore,public afAuth:AngularFireAuth){
+  constructor(db: AngularFirestore, public afAuth: AngularFireAuth) {
     this.items = db.collection('items').valueChanges();
-    
+
   }
 }

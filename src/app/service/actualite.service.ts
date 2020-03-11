@@ -9,13 +9,13 @@ import { map } from 'rxjs/operators';
 })
 export class ActualiteService {
 
-  constructor(private afs:AngularFirestore) { }
+  constructor(private afs: AngularFirestore) { }
 
-  public actualites():Observable<Actualite[]> {
+  public actualites(): Observable<Actualite[]> {
     return this.afs.collection<Actualite>('actualites').valueChanges();
   }
-  public addActualite(actualite:Actualite):Promise<DocumentReference> {
-    return this.afs.collection<Actualite>('actualites').add(actualite)
+  public addActualite(actualite: Actualite): Promise<DocumentReference> {
+    return this.afs.collection<Actualite>('actualites').add(actualite);
   }
 
 

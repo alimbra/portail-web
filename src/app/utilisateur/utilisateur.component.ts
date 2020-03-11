@@ -14,11 +14,11 @@ export class UtilisateurComponent implements OnInit {
   dialogStatus = 'inactive';
 
   @Input()
-  utilisateur :Utilisateur;
-  
+  utilisateur: Utilisateur;
+
   @Input()
-  isAdmin:boolean;
-  
+  isAdmin: boolean;
+
   constructor( public dialog: MatDialog) {}
 
   ngOnInit() {
@@ -28,7 +28,7 @@ export class UtilisateurComponent implements OnInit {
     this.dialogStatus = 'active';
     this.updateDialog = this.dialog.open(UpdateUtilisateurComponent, {
       width: '450px',
-      data: {utilisateur:this.utilisateur}
+      data: {utilisateur: this.utilisateur}
     });
 
     this.updateDialog.afterClosed().subscribe((person) => { });

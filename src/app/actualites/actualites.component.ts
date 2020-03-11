@@ -9,15 +9,15 @@ import { Actualite } from '../actualite';
   styleUrls: ['./actualites.component.scss']
 })
 export class ActualitesComponent implements OnInit {
-  actualites:Actualite[];
-  constructor(private actualiteService:ActualiteService) { }
+  actualites: Actualite[];
+  constructor(private actualiteService: ActualiteService) { }
 
   ngOnInit() {
-    this.actualiteService.actualites().subscribe( (news)=>{
-      this.actualites = news;  
+    this.actualiteService.actualites().subscribe( (news) => {
+      this.actualites = news;
     });
   }
 
-  
+
 
 }

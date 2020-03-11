@@ -9,8 +9,8 @@ import { Section } from '../section';
 export class DocumentComponent implements OnInit {
 
   @Input()
-  document :Section;
-  
+  document: Section;
+
   constructor() { }
 
   ngOnInit() {

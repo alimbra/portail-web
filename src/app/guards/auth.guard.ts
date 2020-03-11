@@ -7,43 +7,42 @@ import { UtilisateurService } from '../service/utilisateur.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private router:Router,private utilisateurService:UtilisateurService){
+  constructor(private router: Router, private utilisateurService: UtilisateurService) {
 
   }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    
-      let uid = localStorage.getItem('uid');
-      let role = localStorage.getItem('role');
-      
-      let roleUser = '';
-      if(uid == undefined){
+
+      const uid = localStorage.getItem('uid');
+      const role = localStorage.getItem('role');
+
+      const roleUser = '';
+      if (uid === undefined) {
         this.router.navigate(['/login']);
 
         return false;
-      }      
-      if(role == 'admin'){
+      }
+      if (role === 'admin') {
         return true;
       }
       this.router.navigate(['/accueil']);
 
       return false;
-      
+
   }
-  hasCustomClaim(){
+  hasCustomClaim() {
     let role;
-    this.utilisateurService.getUtilisateur(localStorage.getItem('uid')).subscribe( (user)=>{
+    this.utilisateurService.getUtilisateur(localStorage.getItem('uid')).subscribe( (user) => {
       role = user.role;
-    })
-    
-    if(role = 'admin'){
+    });
+
+    if (role === 'admin') {
       return true;
-    }
-    else{
+    } else {
       this.router.navigate(['/accueil']);
       return false;
     }
   }
-  
+
 }

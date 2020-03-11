@@ -10,7 +10,7 @@ export class AccueilComponent implements OnInit {
   constructor() {
     localStorage.getItem('monObjet');
     console.log(localStorage.getItem('monObjet'));
-    
+
   }
 
   ngOnInit() {

@@ -12,38 +12,37 @@ import { Router } from '@angular/router';
 export class AjoutActualiteComponent implements OnInit {
 
   publicationForm = this.fb.group({
-    titre:['',[Validators.required,Validators.minLength(3)]],
-    contenu:['',[Validators.required,Validators.minLength(10)] ],
+    titre: ['', [Validators.required, Validators.minLength(3)]],
+    contenu: ['', [Validators.required, Validators.minLength(10)] ],
   });
-  constructor(private fb:FormBuilder,
-    private actualiteService:ActualiteService,
-    private router:Router) { }
+  constructor(private fb: FormBuilder,
+              private actualiteService: ActualiteService,
+              private router: Router) { }
 
-  ngOnInit() { 
+  ngOnInit() {
   }
 
   get f() { return this.publicationForm.controls; }
 
-  onSubmit(){
-    
+  onSubmit() {
+
     if (this.publicationForm.invalid) {
       console.log(this.publicationForm.status);  // false
-  
-    }
-    else{
-      //console.log(this.publicationForm.value.titre);
-      //console.log(this.publicationForm.value.contenu);
+
+    } else {
+      // console.log(this.publicationForm.value.titre);
+      // console.log(this.publicationForm.value.contenu);
       // true
-      
+
       this.actualiteService.addActualite(this.publicationForm.value)
-      .then(()=> {
-        console.log("SUCCESS ");
+      .then(() => {
+        console.log('SUCCESS ');
         this.router.navigate(['/actualites']);
       })
       .catch( () => {
-        console.log("UNSUCCESS ");
-      })
-      
+        console.log('UNSUCCESS ');
+      });
+
     }
 
   }

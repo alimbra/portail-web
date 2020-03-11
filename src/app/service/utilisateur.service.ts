@@ -10,35 +10,35 @@ import { ActionSequence } from 'protractor';
 })
 export class UtilisateurService {
 
-  constructor(private afs:AngularFirestore) { }
-  
+  constructor(private afs: AngularFirestore) { }
+
   public utilisateurs(): Observable<Utilisateur[]> {
     return this.afs.collection<Utilisateur>('utilisateurs').valueChanges({ idField: 'id' });
   }
-  
-  public getUtilisateur(id:string):Observable<any> {
+
+  public getUtilisateur(id: string): Observable<any> {
 
     return this.afs.collection<Utilisateur>('utilisateurs').doc(id).get();
   }
-  
-  public updateUtilisateur(utilisateur:Utilisateur):Promise<void>{
+
+  public updateUtilisateur(utilisateur: Utilisateur): Promise<void> {
     console.log(utilisateur);
-    
+
 
     return this.afs.collection<Utilisateur>('utilisateurs')
     .doc(utilisateur.id).update({
-      "nom":utilisateur.nom,
-      "prenom":utilisateur.prenom,
-      "email":utilisateur.email,
-      "photoUrl":utilisateur.photoUrl,
-      "role":utilisateur.role
+      nom: utilisateur.nom,
+      prenom: utilisateur.prenom,
+      email: utilisateur.email,
+      photoUrl: utilisateur.photoUrl,
+      role: utilisateur.role
     });
   }
 
 /*  public isAdmin(uid:string):boolean {
     let isAdmin = false;
     this.getUtilisateur(uid).subscribe((user)=>{
-      
+
       if(user.data().role=='admin'){
         isAdmin = true;
       }
@@ -48,6 +48,6 @@ export class UtilisateurService {
     });
     return isAdmin;
   }*/
-  
-  
+
+
 }

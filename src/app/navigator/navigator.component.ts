@@ -19,38 +19,36 @@ export class NavigatorComponent {
       map(result => result.matches),
       shareReplay()
     );
-  isAdmin:boolean = false;
-  isEmploye:boolean = false;
+  isAdmin = false;
+  isEmploye = false;
   constructor(private breakpointObserver: BreakpointObserver,
-    private userService:UtilisateurService,
-    private authentification:AuthentificationService,private router:Router ) {
-      let uid = localStorage.getItem('uid');
+              private userService: UtilisateurService,
+              private authentification: AuthentificationService, private router: Router ) {
+      const uid = localStorage.getItem('uid');
 
 
-      this.userService.getUtilisateur(uid).subscribe((user)=>{
-        
-        if(user.data().role=='admin'){
+      this.userService.getUtilisateur(uid).subscribe((user) => {
+
+        if (user.data().role === 'admin') {
           this.isAdmin = true;
-        }
-        else{
+        } else {
           this.isAdmin = false;
         }
 
-        if(user.data().role=='employe'){
+        if (user.data().role === 'employe') {
           this.isEmploye = true;
-        }
-        else{
+        } else {
           this.isEmploye = false;
         }
 
       });
     }
-  
+
   logout() {
-    this.authentification.logout().then(()=>{
+    this.authentification.logout().then(() => {
       this.router.navigate(['/login']);
-    }).catch(() =>{
-      console.log("erreur")
+    }).catch(() => {
+      console.log('erreur');
     });
   }
 }

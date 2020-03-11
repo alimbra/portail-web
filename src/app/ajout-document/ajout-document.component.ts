@@ -13,28 +13,28 @@ import { Section } from '../section';
 export class AjoutDocumentComponent implements OnInit {
 
   ajoutDocumentForm = this.fb.group(
-  { 
-    titre:['',[Validators.required,Validators.minLength(3)]],
-    fichier:[null,[Validators.required] ],
+  {
+    titre: ['', [Validators.required, Validators.minLength(3)]],
+    fichier: [null, [Validators.required] ],
   });
-    
-  constructor(private fb:FormBuilder,
-    private router:Router,
-    private documentService:DocumentService) { }
-  
+
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private documentService: DocumentService) { }
+
   ngOnInit() {
   }
 
   get f() { return this.ajoutDocumentForm.controls; }
 
-  onSubmit(){
+  onSubmit() {
   }
-  upload(event){
+  upload(event) {
     this.documentService.storeFile(event)
-    .subscribe( (progression)=>{
-      if(progression == 100){
-        console.log("fini");
-        let section:Section = {nom:event.target.files[0]['name'],lien:''};
+    .subscribe( (progression) => {
+      if (progression === 100) {
+        console.log('fini');
+        const section: Section = {nom: event.target.files[0].name, lien: ''};
         this.documentService.addDocument(section)
         .then(() => {
           this.router.navigate(['documents']);

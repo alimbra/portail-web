@@ -9,22 +9,22 @@ import { Utilisateur } from '../utilisateur';
 })
 export class AuthentificationService {
 
-  constructor(private afu:AngularFireAuth) { }
+  constructor(private afu: AngularFireAuth) { }
 
-  public login(email:string, password:string): Promise<firebase.auth.UserCredential>{
-    return this.afu.auth.signInWithEmailAndPassword(email,password)
+  public login(email: string, password: string): Promise<firebase.auth.UserCredential> {
+    return this.afu.auth.signInWithEmailAndPassword(email, password);
 
   }
-  public logout():Promise<void>{
+  public logout(): Promise<void> {
     localStorage.removeItem('uid');
     return this.afu.auth.signOut();
   }
-  public user(): Observable<firebase.User>{
+  public user(): Observable<firebase.User> {
     return this.afu.user;
   }
-  
-  public addUser(email:string, password:string):Promise<firebase.auth.UserCredential>{
-    return this.afu.auth.createUserWithEmailAndPassword(email,password);
+
+  public addUser(email: string, password: string): Promise<firebase.auth.UserCredential> {
+    return this.afu.auth.createUserWithEmailAndPassword(email, password);
   }
- 
+
 }
