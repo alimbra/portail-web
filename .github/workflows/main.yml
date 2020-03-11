@@ -25,8 +25,6 @@ jobs:
       run: npm run lint
     - name: Build
       run: npm run build -- --prod
-    - name: Test
-      run: npm test -- --configuration=ci
     - name: E2E
       run: npm run e2e -- --configuration=ci,
     - name: DeployFireBase
